@@ -20,14 +20,14 @@
   --accent: #00d4ff;
   --accent-dim: #008ba8;
   --accent-light: #66e5ff;
-  --bull: #00ff88;
-  --bull-dim: #00a855;
-  --bear: #ff2d55;
-  --bear-dim: #cc1a3a;
-  --gold: #d4af37;
+  --bull: #00ff00;
+  --bull-dim: #27a800;
+  --bear: #f10000;
+  --bear-dim: #cf0000;
+  --gold: #706029;
   --shadow-accent: 0 0 30px rgba(0, 212, 255, 0.25);
-  --shadow-bull: 0 0 25px rgba(0, 255, 136, 0.3);
-  --shadow-bear: 0 0 25px rgba(255, 45, 85, 0.3);
+  --shadow-bull: 0 0 25px rgb(21, 255, 0);
+  --shadow-bear: 0 0 25px rgb(245, 0, 0);
 }
 
 * { 
@@ -221,12 +221,12 @@ body::before {
 
 .signal-icon.direction-up {
   stroke: var(--bull);
-  filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.5));
+  filter: drop-shadow(0 0 6px rgb(43, 255, 0));
 }
 
 .signal-icon.direction-down {
   stroke: var(--bear);
-  filter: drop-shadow(0 0 6px rgba(255, 45, 85, 0.5));
+  filter: drop-shadow(0 0 6px rgb(250, 0, 0));
 }
 
 .signal-label {
@@ -251,7 +251,7 @@ body::before {
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 2px;
-  text-shadow: 0 0 15px rgba(255, 45, 85, 0.7);
+  text-shadow: 0 0 15px rgb(255, 0, 0);
 }
 
 .direction-buy {
@@ -259,7 +259,7 @@ body::before {
   font-weight: 700;
   font-size: 15px;
   letter-spacing: 2px;
-  text-shadow: 0 0 15px rgba(0, 255, 136, 0.7);
+  text-shadow: 0 0 15px rgb(21, 255, 0);
 }
 
 /* Footer - Compact */
@@ -323,12 +323,12 @@ body::before {
 }
 
 .stat-box.win {
-  border-color: rgba(0, 255, 136, 0.3);
+  border-color: rgb(9, 255, 0);
   background: rgba(0, 255, 136, 0.05);
 }
 
 .stat-box.loss {
-  border-color: rgba(255, 45, 85, 0.3);
+  border-color: rgb(231, 0, 0);
   background: rgba(255, 45, 85, 0.05);
 }
 
@@ -353,12 +353,12 @@ body::before {
 
 .stat-value.win { 
   color: var(--bull);
-  text-shadow: 0 0 12px rgba(0, 255, 136, 0.5);
+  text-shadow: 0 0 12px rgb(30, 255, 0);
 }
 
 .stat-value.loss { 
   color: var(--bear);
-  text-shadow: 0 0 12px rgba(255, 45, 85, 0.5);
+  text-shadow: 0 0 12px rgba(185, 2, 2, 0.993);
 }
 
 .stat-value.total { 
@@ -406,7 +406,7 @@ body::before {
 }
 
 .result-item:hover {
-  border-color: rgba(0, 212, 255, 0.4);
+  border-color: rgba(0, 4, 255, 0.4);
   background: linear-gradient(145deg, #0f1830, #0a1120);
   transform: translateX(6px);
   box-shadow: 0 5px 25px rgba(0, 212, 255, 0.15);
@@ -454,15 +454,15 @@ body::before {
 .result-status.win {
   color: var(--bull);
   background: rgba(0, 255, 136, 0.1);
-  border: 1px solid rgba(0, 255, 136, 0.3);
-  text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+  border: 1px solid rgba(7, 221, 18, 0.932);
+  text-shadow: 0 0 8px rgb(39, 231, 0);
 }
 
 .result-status.loss {
   color: var(--bear);
   background: rgba(255, 45, 85, 0.1);
-  border: 1px solid rgba(255, 45, 85, 0.3);
-  text-shadow: 0 0 8px rgba(255, 45, 85, 0.4);
+  border: 1px solid rgb(245, 0, 0);
+  text-shadow: 0 0 8px rgb(255, 0, 0);
 }
 
 .result-meta {
@@ -489,13 +489,13 @@ body::before {
 
 .type-sell {
   color: var(--bear);
-  border-color: rgba(255, 45, 85, 0.4);
+  border-color: rgb(228, 0, 0);
   background: rgba(255, 45, 85, 0.08);
 }
 
 .type-buy {
   color: var(--bull);
-  border-color: rgba(0, 255, 136, 0.4);
+  border-color: rgb(21, 255, 0);
   background: rgba(0, 255, 136, 0.08);
 }
 
@@ -509,12 +509,12 @@ body::before {
 
 .outcome-win { 
   color: var(--bull);
-  text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
+  text-shadow: 0 0 15px rgb(9, 255, 0);
 }
 
 .outcome-loss { 
   color: var(--bear);
-  text-shadow: 0 0 15px rgba(255, 45, 85, 0.6);
+  text-shadow: 0 0 15px rgb(170, 1, 1);
 }
 
 /* Bottom Navigation - Compact */
