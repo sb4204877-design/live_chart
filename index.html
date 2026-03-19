@@ -2,27 +2,26 @@
 <html lang="ar" dir="ltr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>QX ZERO VIP</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
 :root { 
-  --bg: #0c1220; 
-  --panel: #111936; 
-  --border: #1e3a5f; 
-  --text: #e2e8f0; 
-  --accent: #00d4ff;
-  --bull: #00c853;
-  --bear: #ff1744;
-  --hover: #1e293b;
-  --gold: #ffd700;
-  --gold-dark: #b8860b;
+  --bg: #0a0a0a; 
+  --panel: #111111; 
+  --border: #2a2a2a; 
+  --text: #f5f5f5; 
+  --accent: #c9a962;
+  --accent-light: #e8d5a3;
+  --bull: #22c55e;
+  --bear: #ef4444;
 }
 
 * { 
   margin: 0; 
   padding: 0; 
   box-sizing: border-box; 
-  font-family: 'Segoe UI', 'Arial', sans-serif; 
 }
 
 html, body { 
@@ -30,17 +29,32 @@ html, body {
   background: var(--bg);
   color: var(--text); 
   overflow: hidden;
+  font-family: 'Cormorant Garamond', serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Pattern */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
   background-image: 
-    radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(0, 200, 83, 0.05) 0%, transparent 50%);
+    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(201, 169, 98, 0.02) 35px, rgba(201, 169, 98, 0.02) 70px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Main Container */
 #main-container {
-  height: calc(100% - 70px);
+  height: calc(100% - 60px);
   overflow-y: auto;
   position: relative;
-  padding: 20px;
+  z-index: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Signal Page */
@@ -49,329 +63,242 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100%;
-  animation: fadeIn 0.6s ease-out;
-}
-
-/* Luxury Signal Card */
-.luxury-card {
-  background: linear-gradient(135deg, rgba(17, 25, 54, 0.95), rgba(12, 18, 32, 0.98));
-  border: 2px solid transparent;
-  background-clip: padding-box;
-  position: relative;
-  border-radius: 24px;
-  padding: 40px 50px;
-  box-shadow: 
-    0 0 60px rgba(0, 212, 255, 0.15),
-    inset 0 0 60px rgba(0, 212, 255, 0.05),
-    0 20px 40px rgba(0, 0, 0, 0.4);
-  animation: cardGlow 3s ease-in-out infinite alternate;
-  max-width: 500px;
   width: 100%;
-  text-align: center;
+  max-width: 380px;
 }
 
-.luxury-card::before {
-  content: '';
-  position: absolute;
-  top: -2px; left: -2px; right: -2px; bottom: -2px;
-  background: linear-gradient(135deg, var(--accent), var(--gold), var(--accent));
-  border-radius: 24px;
-  z-index: -1;
-  animation: borderRotate 4s linear infinite;
-}
-
-@keyframes borderRotate {
-  0% { filter: hue-rotate(0deg); }
-  100% { filter: hue-rotate(360deg); }
-}
-
-@keyframes cardGlow {
-  0% { box-shadow: 0 0 60px rgba(0, 212, 255, 0.15), inset 0 0 60px rgba(0, 212, 255, 0.05); }
-  100% { box-shadow: 0 0 80px rgba(0, 212, 255, 0.25), inset 0 0 80px rgba(0, 212, 255, 0.1); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Decorative Lines */
-.decoration-line {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  margin: 20px 0;
+/* Compact Luxury Card */
+.luxury-card {
+  background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 35px 28px;
+  width: 100%;
   position: relative;
-  overflow: hidden;
+  box-shadow: 
+    0 10px 40px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(201, 169, 98, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.03);
 }
 
-.decoration-line::after {
-  content: '◆';
+/* Gold Corners - Smaller */
+.corner {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--accent);
-  background: var(--panel);
-  padding: 0 15px;
-  font-size: 12px;
+  width: 20px; height: 20px;
+  border: 1.5px solid var(--accent);
+  opacity: 0.5;
 }
 
-/* Title Styling */
-.main-title {
-  font-size: 42px;
+.corner-tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.corner-tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.corner-bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+.corner-br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+
+/* Header Compact */
+.card-header {
+  text-align: center;
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--text), var(--accent), var(--gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text);
   letter-spacing: 8px;
-  margin-bottom: 10px;
-  text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-  font-family: 'Times New Roman', serif;
+  margin-bottom: 8px;
 }
 
 .vip-badge {
   display: inline-block;
-  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-  color: #000;
-  padding: 8px 30px;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 18px;
-  letter-spacing: 15px;
-  margin: 20px 0;
-  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
-  position: relative;
-  overflow: hidden;
+  font-family: 'Playfair Display', serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 6px;
+  padding: 5px 18px;
+  border: 1px solid rgba(201, 169, 98, 0.4);
+  background: rgba(201, 169, 98, 0.03);
 }
 
-.vip-badge::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: shine 2s infinite;
+/* Divider Compact */
+.divider {
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+  margin: 20px auto;
+  opacity: 0.4;
 }
 
-@keyframes shine {
-  100% { left: 100%; }
-}
-
-/* Signal Details */
+/* Signal Details Compact */
 .signal-details {
-  text-align: left;
-  margin: 30px 0;
-  space-y: 15px;
+  margin: 25px 0;
 }
 
 .signal-row {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(30, 58, 95, 0.5);
-  font-size: 16px;
-  transition: all 0.3s;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(42, 42, 42, 0.6);
 }
 
-.signal-row:hover {
-  background: rgba(0, 212, 255, 0.05);
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 8px;
+.signal-row:last-child {
+  border-bottom: none;
 }
 
 .signal-label {
-  color: #64748b;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-size: 10px;
+  color: #666;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
 .signal-value {
-  font-weight: bold;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
   color: var(--text);
-  font-family: 'Courier New', monospace;
-  letter-spacing: 1px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
+/* Direction Compact */
 .direction-sell {
   color: var(--bear);
-  text-shadow: 0 0 10px rgba(255, 23, 68, 0.5);
-  font-size: 20px;
-  animation: pulse 1.5s infinite;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1.5px;
 }
 
 .direction-buy {
   color: var(--bull);
-  text-shadow: 0 0 10px rgba(0, 200, 83, 0.5);
-  font-size: 20px;
-  animation: pulse 1.5s infinite;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 1.5px;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-/* Footer Text */
-.footer-text {
+/* Footer Compact */
+.card-footer {
+  text-align: center;
   margin-top: 25px;
-  font-size: 14px;
-  color: var(--gold);
-  letter-spacing: 4px;
-  font-weight: bold;
-  opacity: 0.8;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
 }
 
-/* Results Page */
+.edition-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 9px;
+  color: var(--accent);
+  letter-spacing: 3px;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+/* Results Page Compact */
 #results-page {
   display: none;
-  animation: fadeIn 0.4s ease-out;
-  padding-bottom: 20px;
+  width: 100%;
+  max-width: 380px;
+  padding: 10px 0;
 }
 
 .page-title {
-  font-size: 28px;
-  color: var(--accent);
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
   text-align: center;
-  margin-bottom: 30px;
-  text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-  letter-spacing: 3px;
+  color: var(--text);
+  letter-spacing: 5px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
 }
 
-/* Results List */
+/* Results List Compact */
 .results-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  max-width: 600px;
-  margin: 0 auto;
+  gap: 8px;
 }
 
 .result-item {
-  background: linear-gradient(135deg, rgba(17, 25, 54, 0.9), rgba(12, 18, 32, 0.95));
+  background: #111;
   border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
+  padding: 18px 20px;
   display: grid;
   grid-template-columns: 1fr auto auto;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
   transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-}
-
-.result-item::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 4px;
-  background: var(--accent);
-  opacity: 0;
-  transition: opacity 0.3s;
 }
 
 .result-item:hover {
-  transform: translateX(5px);
-  border-color: var(--accent);
-  box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
+  border-color: rgba(201, 169, 98, 0.3);
+  background: #151515;
 }
 
-.result-item:hover::before {
-  opacity: 1;
+.result-item.win {
+  border-left: 2px solid var(--bull);
 }
 
-.result-item.win::before {
-  background: var(--bull);
-  opacity: 1;
-}
-
-.result-item.loss::before {
-  background: var(--bear);
-  opacity: 1;
+.result-item.loss {
+  border-left: 2px solid var(--bear);
 }
 
 .asset-name {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.asset-name::before {
-  content: '◈';
-  color: var(--accent);
+.result-meta {
+  font-size: 10px;
+  color: #555;
+  margin-top: 3px;
+  letter-spacing: 0.5px;
 }
 
 .result-type {
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 1px;
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  border: 1px solid;
+  text-transform: uppercase;
 }
 
 .type-sell {
-  background: rgba(255, 23, 68, 0.2);
   color: var(--bear);
-  border: 1px solid rgba(255, 23, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.25);
 }
 
 .type-buy {
-  background: rgba(0, 200, 83, 0.2);
   color: var(--bull);
-  border: 1px solid rgba(0, 200, 83, 0.3);
+  border-color: rgba(34, 197, 94, 0.25);
 }
 
 .result-outcome {
-  font-size: 24px;
-  font-weight: bold;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
 }
 
-.outcome-win {
-  color: var(--bull);
-  text-shadow: 0 0 10px rgba(0, 200, 83, 0.3);
-}
+.outcome-win { color: var(--bull); }
+.outcome-loss { color: var(--bear); }
 
-.outcome-loss {
-  color: var(--bear);
-  text-shadow: 0 0 10px rgba(255, 23, 68, 0.3);
-}
-
-.result-time {
-  grid-column: 1 / -1;
-  font-size: 12px;
-  color: #64748b;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 5px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(30, 58, 95, 0.3);
-}
-
-/* Bottom Navigation */
+/* Bottom Navigation Compact */
 #bottom-nav {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
-  background: linear-gradient(180deg, rgba(17, 25, 54, 0.98), rgba(12, 18, 32, 1));
+  left: 0; right: 0;
+  height: 60px;
+  background: #0a0a0a;
   border-top: 1px solid var(--border);
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 60px;
   align-items: center;
-  padding: 0 40px;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4);
   z-index: 1000;
 }
 
@@ -379,83 +306,49 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   cursor: pointer;
-  padding: 10px 30px;
-  border-radius: 12px;
+  padding: 8px 25px;
+  color: #444;
   transition: all 0.3s;
-  color: #64748b;
-  position: relative;
+  border: 1px solid transparent;
 }
 
 .nav-item:hover {
-  color: var(--text);
-  background: rgba(0, 212, 255, 0.1);
+  color: #888;
 }
 
 .nav-item.active {
   color: var(--accent);
-  background: rgba(0, 212, 255, 0.15);
-}
-
-.nav-item.active::before {
-  content: '';
-  position: absolute;
-  top: -1px; left: 50%; transform: translateX(-50%);
-  width: 40px; height: 3px;
-  background: var(--accent);
-  border-radius: 0 0 4px 4px;
-  box-shadow: 0 0 10px var(--accent);
+  border-color: rgba(201, 169, 98, 0.3);
+  background: rgba(201, 169, 98, 0.03);
 }
 
 .nav-icon {
-  width: 26px;
-  height: 26px;
-  stroke-width: 2;
+  width: 16px; height: 16px;
+  stroke-width: 1.5;
   fill: none;
   stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 .nav-label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent);
-}
+/* Scrollbar Minimal */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .luxury-card {
-    padding: 30px 25px;
-    margin: 10px;
-  }
-  .main-title {
-    font-size: 32px;
-    letter-spacing: 4px;
-  }
-  .signal-row {
-    font-size: 14px;
-  }
-  .result-item {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
+/* Very Small Screens */
+@media (max-width: 380px) {
+  .luxury-card { padding: 30px 22px; }
+  .brand-text { font-size: 24px; letter-spacing: 6px; }
+  .signal-value { font-size: 13px; }
+  .asset-name { font-size: 14px; }
 }
 </style>
 <base target="_blank">
@@ -466,99 +359,84 @@ html, body {
   <!-- Signal Page -->
   <div id="signal-page">
     <div class="luxury-card">
-      <div class="main-title">𒁂 QX ZERO 𒁂</div>
+      <div class="corner corner-tl"></div>
+      <div class="corner corner-tr"></div>
+      <div class="corner corner-bl"></div>
+      <div class="corner corner-br"></div>
       
-      <div class="vip-badge">𒐬 VIP 𒐬</div>
-      
-      <div class="decoration-line"></div>
-      
+      <div class="card-header">
+        <div class="brand-text">QX ZERO</div>
+        <div class="vip-badge">V I P</div>
+      </div>
+
       <div class="signal-details">
         <div class="signal-row">
-          <span class="signal-label">✧ ASSET PAIR</span>
+          <span class="signal-label">Asset Pair</span>
           <span class="signal-value">USDTRY-OTC</span>
         </div>
         
         <div class="signal-row">
-          <span class="signal-label">✧ TIMEFRAME</span>
+          <span class="signal-label">Timeframe</span>
           <span class="signal-value">1 MINUTE</span>
         </div>
         
         <div class="signal-row">
-          <span class="signal-label">✧ ENTRY TIME</span>
-          <span class="signal-value">14:35 (UTC+1)</span>
+          <span class="signal-label">Entry Time</span>
+          <span class="signal-value">14:35 UTC+1</span>
         </div>
         
         <div class="signal-row">
-          <span class="signal-label">✧ DIRECTION</span>
+          <span class="signal-label">Direction</span>
           <span class="signal-value direction-sell">▼ SELL</span>
         </div>
       </div>
-      
-      <div class="decoration-line"></div>
-      
-      <div class="footer-text">❰ ROYAL GOLD EDITION ❱</div>
+
+      <div class="card-footer">
+        <div class="divider"></div>
+        <div class="edition-text">ROYAL GOLD EDITION</div>
+      </div>
     </div>
   </div>
 
   <!-- Results Page -->
   <div id="results-page">
-    <div class="page-title">◈ TRADING RESULTS ◈</div>
+    <div class="page-title">HISTORY</div>
     
     <div class="results-list">
-      <!-- Result Item 1 - Win -->
       <div class="result-item win">
-        <div class="asset-name">EUR/USD (OTC)</div>
-        <div class="result-type type-sell">SELL</div>
-        <div class="result-outcome outcome-win">+85%</div>
-        <div class="result-time">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle;">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
-          19 Mar 2026 - 14:35 (UTC+1)
+        <div>
+          <div class="asset-name">EUR/USD</div>
+          <div class="result-meta">19 MAR 2026 • 14:35</div>
         </div>
-      </div>
-
-      <!-- Result Item 2 - Loss -->
-      <div class="result-item loss">
-        <div class="asset-name">GBP/JPY (OTC)</div>
         <div class="result-type type-buy">BUY</div>
-        <div class="result-outcome outcome-loss">-100%</div>
-        <div class="result-time">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle;">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
-          19 Mar 2026 - 14:20 (UTC+1)
-        </div>
+        <div class="result-outcome outcome-win">+85%</div>
       </div>
 
-      <!-- Result Item 3 - Win -->
+      <div class="result-item loss">
+        <div>
+          <div class="asset-name">GBP/JPY</div>
+          <div class="result-meta">19 MAR 2026 • 14:20</div>
+        </div>
+        <div class="result-type type-sell">SELL</div>
+        <div class="result-outcome outcome-loss">-100%</div>
+      </div>
+
       <div class="result-item win">
-        <div class="asset-name">AUD/CAD (OTC)</div>
+        <div>
+          <div class="asset-name">AUD/CAD</div>
+          <div class="result-meta">19 MAR 2026 • 13:55</div>
+        </div>
         <div class="result-type type-buy">BUY</div>
         <div class="result-outcome outcome-win">+92%</div>
-        <div class="result-time">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle;">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
-          19 Mar 2026 - 13:55 (UTC+1)
-        </div>
       </div>
 
-      <!-- Result Item 4 - Win -->
       <div class="result-item win">
-        <div class="asset-name">USD/CHF (OTC)</div>
+        <div>
+          <div class="asset-name">USD/CHF</div>
+          <div class="result-meta">19 MAR 2026 • 13:30</div>
+        </div>
         <div class="result-type type-sell">SELL</div>
         <div class="result-outcome outcome-win">+88%</div>
-        <div class="result-time">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: inline; vertical-align: middle;">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
-          19 Mar 2026 - 13:30 (UTC+1)
-        </div>
       </div>
     </div>
   </div>
@@ -570,15 +448,17 @@ html, body {
     <svg class="nav-icon" viewBox="0 0 24 24">
       <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
     </svg>
-    <span class="nav-label">SIGNALS</span>
+    <span class="nav-label">Signals</span>
   </div>
   
   <div class="nav-item" onclick="showPage('results')" id="nav-results">
     <svg class="nav-icon" viewBox="0 0 24 24">
-      <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/>
-      <circle cx="12" cy="12" r="3"/>
+      <path d="M3 3v18h18"/>
+      <path d="M18 17V9"/>
+      <path d="M13 17V5"/>
+      <path d="M8 17v-3"/>
     </svg>
-    <span class="nav-label">RESULTS</span>
+    <span class="nav-label">Results</span>
   </div>
 </div>
 
@@ -602,32 +482,10 @@ function showPage(page) {
   }
 }
 
-// Add dynamic update capability
-function updateSignal(asset, timeframe, time, direction) {
-  const rows = document.querySelectorAll('.signal-value');
-  if (rows.length >= 4) {
-    rows[0].textContent = asset;
-    rows[1].textContent = timeframe;
-    rows[2].textContent = time;
-    
-    const dirElement = rows[3];
-    if (direction === 'SELL') {
-      dirElement.innerHTML = '▼ SELL';
-      dirElement.className = 'signal-value direction-sell';
-    } else {
-      dirElement.innerHTML = '▲ BUY';
-      dirElement.className = 'signal-value direction-buy';
-    }
-  }
-}
-
-// Example: Auto-update every 10 seconds for demo
-setInterval(() => {
-  const directions = ['SELL', 'BUY'];
-  const randomDir = directions[Math.floor(Math.random() * directions.length)];
-  // Uncomment to test dynamic updates:
-  // updateSignal('GBP/USD (OTC)', '5 MINUTES', '15:00 (UTC+1)', randomDir);
-}, 10000);
+// Prevent zoom on double tap
+document.addEventListener('dblclick', function(event) {
+  event.preventDefault();
+}, { passive: false });
 </script>
 
 </body>
