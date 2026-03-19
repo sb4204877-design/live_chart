@@ -9,17 +9,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root { 
-  --bg: #0c1220; 
-  --panel: #111936; 
-  --border: #1e3a5f; 
-  --text: #e2e8f0; 
+  --bg: #05080d; 
+  --bg-dark: #020408;
+  --panel: #0a1120; 
+  --panel-dark: #070d18;
+  --border: #1a2740; 
+  --border-light: #2a3d5c;
+  --text: #e8eef8; 
+  --text-dim: #8899b0;
   --accent: #00d4ff;
   --accent-dim: #008ba8;
   --accent-light: #66e5ff;
-  --bull: #00c853;
-  --bear: #ff1744;
-  --hover: #1e293b;
-  --shadow-accent: 0 0 20px rgba(0, 212, 255, 0.3);
+  --bull: #00ff88;
+  --bull-dim: #00a855;
+  --bear: #ff2d55;
+  --bear-dim: #cc1a3a;
+  --gold: #d4af37;
+  --shadow-accent: 0 0 30px rgba(0, 212, 255, 0.25);
+  --shadow-bull: 0 0 25px rgba(0, 255, 136, 0.3);
+  --shadow-bear: 0 0 25px rgba(255, 45, 85, 0.3);
 }
 
 * { 
@@ -44,9 +52,10 @@ body::before {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: 
-    radial-gradient(circle at 50% 0%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-    repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(0, 212, 255, 0.03) 1px, rgba(0, 212, 255, 0.03) 2px);
-  background-size: 100% 100%, 100% 4px;
+    radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(0, 255, 136, 0.03) 0%, transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 212, 255, 0.02) 2px, rgba(0, 212, 255, 0.02) 4px);
+  background-size: 100% 100%, 100% 100%, 100% 4px;
   pointer-events: none;
   z-index: 0;
 }
@@ -57,11 +66,11 @@ body::before {
   overflow-y: auto;
   position: relative;
   z-index: 1;
-  padding: 20px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 /* Signal Page */
@@ -69,24 +78,25 @@ body::before {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  max-width: 400px;
+  max-width: 360px;
+  padding-top: 15px;
   animation: fadeIn 0.8s ease-out;
 }
 
-/* Ultra Luxury Card */
+/* Ultra Luxury Card - Compact */
 .luxury-card {
-  background: linear-gradient(135deg, #0f1628 0%, #1a2542 100%);
+  background: linear-gradient(145deg, var(--panel) 0%, var(--panel-dark) 100%);
   border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 40px 30px;
+  border-radius: 6px;
+  padding: 28px 22px;
   width: 100%;
   position: relative;
   box-shadow: 
-    0 20px 60px rgba(0,0,0,0.8),
-    0 0 0 1px rgba(0, 212, 255, 0.15),
-    inset 0 0 40px rgba(0, 0, 0, 0.5);
+    0 20px 60px rgba(0,0,0,0.9),
+    0 0 0 1px rgba(0, 212, 255, 0.12),
+    inset 0 0 60px rgba(0, 0, 0, 0.6);
   overflow: hidden;
 }
 
@@ -96,70 +106,58 @@ body::before {
   position: absolute;
   top: -50%; left: -50%;
   width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
   pointer-events: none;
-  animation: rotate 20s linear infinite;
+  animation: rotate 30s linear infinite;
 }
 
-/* Ornate Corners */
+/* Ornate Corners - Compact */
 .corner {
   position: absolute;
-  width: 30px; height: 30px;
+  width: 24px; height: 24px;
   border: 2px solid var(--accent);
-  opacity: 0.8;
+  opacity: 0.7;
   transition: all 0.5s ease;
-  box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
 }
 
-.corner-tl { 
-  top: 15px; left: 15px; 
-  border-right: 0; border-bottom: 0; 
-}
-.corner-tr { 
-  top: 15px; right: 15px; 
-  border-left: 0; border-bottom: 0; 
-}
-.corner-bl { 
-  bottom: 15px; left: 15px; 
-  border-right: 0; border-top: 0; 
-}
-.corner-br { 
-  bottom: 15px; right: 15px; 
-  border-left: 0; border-top: 0; 
-}
+.corner-tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; }
+.corner-tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
+.corner-bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; }
+.corner-br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
 
-/* Header */
+/* Header - Compact */
 .card-header {
   text-align: center;
-  margin-bottom: 35px;
-  padding-bottom: 25px;
-  border-bottom: 1px solid rgba(0, 212, 255, 0.25);
+  margin-bottom: 25px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
   position: relative;
 }
 
 .brand-text {
   font-family: 'Cinzel', serif;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 900;
   background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 50%, var(--accent-dim) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 12px;
-  margin-bottom: 12px;
-  text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+  letter-spacing: 10px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.5));
 }
 
 .vip-badge {
   display: inline-block;
   font-family: 'Cinzel', serif;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--accent);
-  letter-spacing: 8px;
-  padding: 8px 24px;
+  letter-spacing: 7px;
+  padding: 6px 20px;
   border: 1px solid var(--accent);
-  background: rgba(0, 212, 255, 0.08);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  background: linear-gradient(180deg, rgba(0, 212, 255, 0.1), rgba(0, 212, 255, 0.05));
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
   position: relative;
 }
 
@@ -168,148 +166,233 @@ body::before {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 8px;
+  font-size: 7px;
   color: var(--accent);
 }
 
-.vip-badge::before { left: 8px; }
-.vip-badge::after { right: 8px; }
+.vip-badge::before { left: 7px; }
+.vip-badge::after { right: 7px; }
 
-/* Divider */
+/* Divider - Compact */
 .divider {
   width: 60px;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  margin: 30px auto;
-  opacity: 0.7;
-  box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  margin: 25px auto;
+  opacity: 0.8;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
 }
 
-/* Signal Details */
+/* Signal Details - Compact */
 .signal-details {
-  margin: 30px 0;
+  margin: 25px 0;
 }
 
 .signal-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(30, 58, 95, 0.6);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(26, 39, 64, 0.7);
   transition: all 0.3s;
 }
 
 .signal-row:hover {
   border-bottom-color: rgba(0, 212, 255, 0.4);
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.03), transparent);
 }
 
 .signal-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .signal-icon {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   stroke: var(--accent);
   stroke-width: 1.5;
   fill: none;
   opacity: 0.9;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.5));
+  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.5));
+}
+
+.signal-icon.direction-up {
+  stroke: var(--bull);
+  filter: drop-shadow(0 0 6px rgba(0, 255, 136, 0.5));
+}
+
+.signal-icon.direction-down {
+  stroke: var(--bear);
+  filter: drop-shadow(0 0 6px rgba(255, 45, 85, 0.5));
 }
 
 .signal-label {
-  font-size: 11px;
-  color: #64748b;
-  letter-spacing: 3px;
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   font-weight: 500;
 }
 
 .signal-value {
   font-family: 'Rajdhani', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--text);
   font-weight: 600;
   letter-spacing: 1px;
 }
 
-/* Direction */
+/* Direction - Compact */
 .direction-sell {
   color: var(--bear);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 15px;
   letter-spacing: 2px;
-  text-shadow: 0 0 15px rgba(255, 23, 68, 0.6);
+  text-shadow: 0 0 15px rgba(255, 45, 85, 0.7);
 }
 
 .direction-buy {
   color: var(--bull);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 15px;
   letter-spacing: 2px;
-  text-shadow: 0 0 15px rgba(0, 200, 83, 0.6);
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.7);
 }
 
-/* Footer */
+/* Footer - Compact */
 .card-footer {
   text-align: center;
-  margin-top: 35px;
-  padding-top: 25px;
-  border-top: 1px solid rgba(0, 212, 255, 0.2);
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(0, 212, 255, 0.18);
 }
 
 .edition-text {
   font-family: 'Cinzel', serif;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--accent);
   letter-spacing: 4px;
   font-weight: 400;
   opacity: 0.85;
-  text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
 }
 
 /* Results Page */
 #results-page {
   display: none;
   width: 100%;
-  max-width: 400px;
-  padding: 10px 0;
+  max-width: 380px;
+  padding: 15px 0;
   animation: fadeIn 0.8s ease-out;
 }
 
 .page-title {
   font-family: 'Cinzel', serif;
-  font-size: 24px;
+  font-size: 20px;
   text-align: center;
   color: var(--accent);
   letter-spacing: 6px;
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 212, 255, 0.25);
-  text-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
 }
 
-/* Results List */
+/* Stats Panel - Compact */
+.stats-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 15px 10px;
+  background: linear-gradient(145deg, var(--panel), var(--panel-dark));
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.stat-box {
+  text-align: center;
+  padding: 12px 8px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  border: 1px solid rgba(26, 39, 64, 0.5);
+}
+
+.stat-box.win {
+  border-color: rgba(0, 255, 136, 0.3);
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.stat-box.loss {
+  border-color: rgba(255, 45, 85, 0.3);
+  background: rgba(255, 45, 85, 0.05);
+}
+
+.stat-box.total {
+  border-color: rgba(0, 212, 255, 0.3);
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.stat-label {
+  font-size: 8px;
+  color: var(--text-dim);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.stat-value {
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.stat-value.win { 
+  color: var(--bull);
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.5);
+}
+
+.stat-value.loss { 
+  color: var(--bear);
+  text-shadow: 0 0 12px rgba(255, 45, 85, 0.5);
+}
+
+.stat-value.total { 
+  color: var(--accent);
+  text-shadow: 0 0 12px rgba(0, 212, 255, 0.5);
+}
+
+.stat-percent {
+  font-size: 9px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.stat-percent.positive { color: var(--bull); }
+.stat-percent.negative { color: var(--bear); }
+
+/* Results List - Compact */
 .results-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .result-item {
-  background: linear-gradient(135deg, #0f1628, #162040);
+  background: linear-gradient(145deg, var(--panel), var(--panel-dark));
   border: 1px solid var(--border);
-  padding: 20px 24px;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 20px;
+  padding: 16px 18px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  border-radius: 4px;
 }
 
 .result-item::before {
@@ -323,10 +406,10 @@ body::before {
 }
 
 .result-item:hover {
-  border-color: rgba(0, 212, 255, 0.5);
-  background: #1a2542;
-  transform: translateX(5px);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.4);
+  background: linear-gradient(145deg, #0f1830, #0a1120);
+  transform: translateX(6px);
+  box-shadow: 0 5px 25px rgba(0, 212, 255, 0.15);
 }
 
 .result-item.win::before {
@@ -339,71 +422,115 @@ body::before {
   box-shadow: 0 0 15px var(--bear);
 }
 
+.result-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .asset-name {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.5px;
   color: var(--text);
 }
 
+.result-status {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 3px 8px;
+  border-radius: 3px;
+}
+
+.result-status.win {
+  color: var(--bull);
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+}
+
+.result-status.loss {
+  color: var(--bear);
+  background: rgba(255, 45, 85, 0.1);
+  border: 1px solid rgba(255, 45, 85, 0.3);
+  text-shadow: 0 0 8px rgba(255, 45, 85, 0.4);
+}
+
 .result-meta {
-  font-size: 10px;
-  color: #64748b;
-  margin-top: 4px;
+  font-size: 9px;
+  color: var(--text-dim);
   letter-spacing: 0.5px;
 }
 
+.result-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .result-type {
-  font-size: 10px;
+  font-size: 8px;
   letter-spacing: 2px;
-  padding: 6px 12px;
+  padding: 5px 10px;
   border: 1px solid;
   text-transform: uppercase;
   font-weight: 600;
+  border-radius: 3px;
 }
 
 .type-sell {
   color: var(--bear);
-  border-color: rgba(255, 23, 68, 0.4);
-  background: rgba(255, 23, 68, 0.08);
+  border-color: rgba(255, 45, 85, 0.4);
+  background: rgba(255, 45, 85, 0.08);
 }
 
 .type-buy {
   color: var(--bull);
-  border-color: rgba(0, 200, 83, 0.4);
-  background: rgba(0, 200, 83, 0.08);
+  border-color: rgba(0, 255, 136, 0.4);
+  background: rgba(0, 255, 136, 0.08);
 }
 
 .result-outcome {
   font-family: 'Cinzel', serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
+  min-width: 60px;
+  text-align: right;
 }
 
 .outcome-win { 
   color: var(--bull);
-  text-shadow: 0 0 15px rgba(0, 200, 83, 0.6);
+  text-shadow: 0 0 15px rgba(0, 255, 136, 0.6);
 }
 
 .outcome-loss { 
   color: var(--bear);
-  text-shadow: 0 0 15px rgba(255, 23, 68, 0.6);
+  text-shadow: 0 0 15px rgba(255, 45, 85, 0.6);
 }
 
-/* Bottom Navigation */
+/* Bottom Navigation - Compact */
 #bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0; right: 0;
-  height: 80px;
-  background: linear-gradient(180deg, rgba(17, 25, 54, 0.95), rgba(12, 18, 32, 1));
-  border-top: 1px solid rgba(0, 212, 255, 0.25);
+  height: 70px;
+  background: linear-gradient(180deg, rgba(10, 17, 32, 0.95), rgba(5, 8, 13, 1));
+  border-top: 1px solid rgba(0, 212, 255, 0.2);
   display: flex;
   justify-content: center;
-  gap: 80px;
+  gap: 60px;
   align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
 }
 
 .nav-item {
@@ -412,8 +539,8 @@ body::before {
   align-items: center;
   gap: 6px;
   cursor: pointer;
-  padding: 10px 30px;
-  color: #475569;
+  padding: 10px 28px;
+  color: #4a5a70;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
@@ -428,11 +555,11 @@ body::before {
   height: 2px;
   background: var(--accent);
   transition: width 0.3s ease;
-  box-shadow: 0 0 10px var(--accent);
+  box-shadow: 0 0 12px var(--accent);
 }
 
 .nav-item:hover {
-  color: #94a3b8;
+  color: #7a8a9f;
 }
 
 .nav-item.active {
@@ -444,7 +571,7 @@ body::before {
 }
 
 .nav-icon {
-  width: 24px; height: 24px;
+  width: 22px; height: 22px;
   stroke-width: 1.5;
   fill: none;
   stroke: currentColor;
@@ -452,11 +579,11 @@ body::before {
 }
 
 .nav-item.active .nav-icon {
-  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.7));
+  filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.8));
 }
 
 .nav-label {
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 3px;
   text-transform: uppercase;
   font-weight: 600;
@@ -464,7 +591,7 @@ body::before {
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(25px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -474,18 +601,28 @@ body::before {
 }
 
 /* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* Responsive */
-@media (max-width: 400px) {
-  .luxury-card { padding: 35px 25px; }
-  .brand-text { font-size: 30px; letter-spacing: 10px; }
-  .signal-value { font-size: 15px; }
-  .asset-name { font-size: 15px; }
-  #bottom-nav { gap: 60px; }
+/* Responsive - Small Phones */
+@media (max-width: 360px) {
+  .luxury-card { padding: 24px 18px; }
+  .brand-text { font-size: 24px; letter-spacing: 8px; }
+  .signal-value { font-size: 13px; }
+  .signal-label { font-size: 8px; letter-spacing: 2px; }
+  .asset-name { font-size: 13px; }
+  .stats-panel { padding: 12px 8px; }
+  .stat-value { font-size: 18px; }
+  .result-item { padding: 14px 15px; }
+  #bottom-nav { gap: 40px; height: 65px; }
+  .nav-item { padding: 8px 22px; }
+  .corner { width: 20px; height: 20px; }
+  .corner-tl { top: 10px; left: 10px; }
+  .corner-tr { top: 10px; right: 10px; }
+  .corner-bl { bottom: 10px; left: 10px; }
+  .corner-br { bottom: 10px; right: 10px; }
 }
 </style>
 </head>
@@ -541,12 +678,12 @@ body::before {
         
         <div class="signal-row">
           <div class="signal-left">
-            <svg class="signal-icon" viewBox="0 0 24 24">
-              <path d="M12 19V5M5 12l7-7 7 7"/>
+            <svg class="signal-icon direction-down" viewBox="0 0 24 24" id="direction-icon">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
             </svg>
             <span class="signal-label">Direction</span>
           </div>
-          <span class="signal-value direction-sell">▼ SELL</span>
+          <span class="signal-value direction-sell" id="direction-text">▼ SELL</span>
         </div>
       </div>
 
@@ -559,43 +696,110 @@ body::before {
 
   <!-- Results Page -->
   <div id="results-page">
-    <div class="page-title">HISTORY</div>
+    <div class="page-title">T R A D I N G &nbsp; H I S T O R Y</div>
+    
+    <!-- Stats Panel -->
+    <div class="stats-panel">
+      <div class="stat-box total">
+        <div class="stat-label">Total</div>
+        <div class="stat-value total">24</div>
+        <div class="stat-percent positive">100%</div>
+      </div>
+      <div class="stat-box win">
+        <div class="stat-label">Wins</div>
+        <div class="stat-value win">19</div>
+        <div class="stat-percent positive">79.2%</div>
+      </div>
+      <div class="stat-box loss">
+        <div class="stat-label">Loss</div>
+        <div class="stat-value loss">5</div>
+        <div class="stat-percent negative">20.8%</div>
+      </div>
+    </div>
     
     <div class="results-list">
       <div class="result-item win">
-        <div>
-          <div class="asset-name">EUR/USD</div>
-          <div class="result-meta">19 MAR 2026 • 14:35</div>
+        <div class="result-left">
+          <div class="result-header">
+            <span class="asset-name">EUR/USD</span>
+            <span class="result-status win">𝑾 𝑰 𝑵 ✓</span>
+          </div>
+          <div class="result-meta">19 MAR • 14:35 • 1M</div>
         </div>
-        <div class="result-type type-buy">BUY</div>
-        <div class="result-outcome outcome-win">+85%</div>
+        <div class="result-right">
+          <div class="result-type type-buy">BUY</div>
+          <div class="result-outcome outcome-win">+85%</div>
+        </div>
       </div>
 
       <div class="result-item loss">
-        <div>
-          <div class="asset-name">GBP/JPY</div>
-          <div class="result-meta">19 MAR 2026 • 14:20</div>
+        <div class="result-left">
+          <div class="result-header">
+            <span class="asset-name">GBP/JPY</span>
+            <span class="result-status loss">𝑳 𝑶 𝑺 𝑺 ✘</span>
+          </div>
+          <div class="result-meta">19 MAR • 14:20 • 1M</div>
         </div>
-        <div class="result-type type-sell">SELL</div>
-        <div class="result-outcome outcome-loss">-100%</div>
+        <div class="result-right">
+          <div class="result-type type-sell">SELL</div>
+          <div class="result-outcome outcome-loss">-100%</div>
+        </div>
       </div>
 
       <div class="result-item win">
-        <div>
-          <div class="asset-name">AUD/CAD</div>
-          <div class="result-meta">19 MAR 2026 • 13:55</div>
+        <div class="result-left">
+          <div class="result-header">
+            <span class="asset-name">AUD/CAD</span>
+            <span class="result-status win">𝑾 𝑰 𝑵 ✓</span>
+          </div>
+          <div class="result-meta">19 MAR • 13:55 • 1M</div>
         </div>
-        <div class="result-type type-buy">BUY</div>
-        <div class="result-outcome outcome-win">+92%</div>
+        <div class="result-right">
+          <div class="result-type type-buy">BUY</div>
+          <div class="result-outcome outcome-win">+92%</div>
+        </div>
       </div>
 
       <div class="result-item win">
-        <div>
-          <div class="asset-name">USD/CHF</div>
-          <div class="result-meta">19 MAR 2026 • 13:30</div>
+        <div class="result-left">
+          <div class="result-header">
+            <span class="asset-name">USD/CHF</span>
+            <span class="result-status win">𝑾 𝑰 𝑵 ✓</span>
+          </div>
+          <div class="result-meta">19 MAR • 13:30 • 1M</div>
         </div>
-        <div class="result-type type-sell">SELL</div>
-        <div class="result-outcome outcome-win">+88%</div>
+        <div class="result-right">
+          <div class="result-type type-sell">SELL</div>
+          <div class="result-outcome outcome-win">+88%</div>
+        </div>
+      </div>
+
+      <div class="result-item win">
+        <div class="result-left">
+          <div class="result-header">
+            <span class="asset-name">EUR/GBP</span>
+            <span class="result-status win">𝑾 𝑰 𝑵 ✓</span>
+          </div>
+          <div class="result-meta">19 MAR • 13:05 • 1M</div>
+        </div>
+        <div class="result-right">
+          <div class="result-type type-buy">BUY</div>
+          <div class="result-outcome outcome-win">+78%</div>
+        </div>
+      </div>
+
+      <div class="result-item loss">
+        <div class="result-left">
+          <div class="result-header">
+            <span class="asset-name">USD/JPY</span>
+            <span class="result-status loss">𝑳 𝑶 𝑺 𝑺 ✘</span>
+          </div>
+          <div class="result-meta">19 MAR • 12:40 • 1M</div>
+        </div>
+        <div class="result-right">
+          <div class="result-type type-sell">SELL</div>
+          <div class="result-outcome outcome-loss">-100%</div>
+        </div>
       </div>
     </div>
   </div>
@@ -638,6 +842,28 @@ function showPage(page) {
     resultsPage.style.display = 'block';
     navSignal.classList.remove('active');
     navResults.classList.add('active');
+  }
+}
+
+// Update direction icon based on signal
+function updateDirection(isBuy) {
+  const icon = document.getElementById('direction-icon');
+  const text = document.getElementById('direction-text');
+  
+  if (isBuy) {
+    icon.innerHTML = '<path d="M12 19V5M5 12l7-7 7 7"/>';
+    icon.classList.remove('direction-down');
+    icon.classList.add('direction-up');
+    text.textContent = '▲ BUY';
+    text.classList.remove('direction-sell');
+    text.classList.add('direction-buy');
+  } else {
+    icon.innerHTML = '<path d="M12 5v14M5 12l7 7 7-7"/>';
+    icon.classList.remove('direction-up');
+    icon.classList.add('direction-down');
+    text.textContent = '▼ SELL';
+    text.classList.remove('direction-buy');
+    text.classList.add('direction-sell');
   }
 }
 
