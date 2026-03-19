@@ -1,27 +1,31 @@
 <!DOCTYPE html>
-<html lang="ar" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>QX ZERO VIP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;500;600;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap');
-
 :root { 
-  --bg: #0a0a0a; 
-  --panel: #111111; 
-  --border: #2a2a2a; 
-  --text: #f5f5f5; 
-  --accent: #c9a962;
-  --accent-light: #e8d5a3;
-  --bull: #22c55e;
-  --bear: #ef4444;
+  --bg: #050505; 
+  --panel: #0f0f0f; 
+  --border: #000000; 
+  --text: #e0e0e0; 
+  --gold: #d4af37;
+  --gold-dim: #8a7020;
+  --gold-light: #f3e5ab;
+  --bull: #1eff00;
+  --bear: #e20000;
+  --shadow-gold: 0 0 20px rgb(2, 0, 121);
 }
 
 * { 
   margin: 0; 
   padding: 0; 
   box-sizing: border-box; 
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body { 
@@ -29,28 +33,30 @@ html, body {
   background: var(--bg);
   color: var(--text); 
   overflow: hidden;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Rajdhani', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Background Pattern */
+/* Dynamic Background */
 body::before {
   content: '';
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(201, 169, 98, 0.02) 35px, rgba(201, 169, 98, 0.02) 70px);
+  background: 
+    radial-gradient(circle at 50% 0%, rgb(1, 3, 124) 0%, transparent 50%),
+    repeating-linear-gradient(0deg, transparent, transparent 1px, rgb(11, 1, 109) 1px, rgb(1, 3, 110) 2px);
+  background-size: 100% 100%, 100% 4px;
   pointer-events: none;
   z-index: 0;
 }
 
 /* Main Container */
 #main-container {
-  height: calc(100% - 60px);
+  height: calc(100% - 80px);
   overflow-y: auto;
   position: relative;
   z-index: 1;
-  padding: 15px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,254 +70,361 @@ body::before {
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 380px;
+  max-width: 400px;
+  animation: fadeIn 0.8s ease-out;
 }
 
-/* Compact Luxury Card */
+/* Ultra Luxury Card */
 .luxury-card {
-  background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+  background: linear-gradient(135deg, #0a0a0a 0%, #000000 100%);
   border: 1px solid var(--border);
-  border-radius: 3px;
-  padding: 35px 28px;
+  border-radius: 4px;
+  padding: 40px 30px;
   width: 100%;
   position: relative;
   box-shadow: 
-    0 10px 40px rgba(0,0,0,0.9),
-    0 0 0 1px rgba(201, 169, 98, 0.08),
-    inset 0 1px 0 rgba(255,255,255,0.03);
+    0 20px 60px rgba(0,0,0,0.8),
+    0 0 0 1px rgb(2, 1, 104),
+    inset 0 0 40px rgba(0,0,0,0.5);
+  overflow: hidden;
 }
 
-/* Gold Corners - Smaller */
+/* Gold Glow Effect */
+.luxury-card::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgb(1, 3, 133) 0%, transparent 70%);
+  pointer-events: none;
+  animation: rotate 20s linear infinite;
+}
+
+/* Ornate Corners */
 .corner {
   position: absolute;
-  width: 20px; height: 20px;
-  border: 1.5px solid var(--accent);
-  opacity: 0.5;
+  width: 30px; height: 30px;
+  border: 2px solid var(--gold);
+  opacity: 0.8;
+  transition: all 0.5s ease;
 }
 
-.corner-tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
-.corner-tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
-.corner-bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
-.corner-br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+.corner-tl { 
+  top: 15px; left: 15px; 
+  border-right: 0; border-bottom: 0; 
+  box-shadow: 2px -2px 10px rgba(2, 4, 119, 0.993);
+}
+.corner-tr { 
+  top: 15px; right: 15px; 
+  border-left: 0; border-bottom: 0; 
+  box-shadow: -2px -2px 10px rgb(1, 9, 117);
+}
+.corner-bl { 
+  bottom: 15px; left: 15px; 
+  border-right: 0; border-top: 0; 
+  box-shadow: 2px 2px 10px rgb(15, 2, 128);
+}
+.corner-br { 
+  bottom: 15px; right: 15px; 
+  border-left: 0; border-top: 0; 
+  box-shadow: -2px 2px 10px rgba(17, 3, 219, 0.3);
+}
 
-/* Header Compact */
+/* Header */
 .card-header {
   text-align: center;
-  margin-bottom: 25px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--border);
+  margin-bottom: 35px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  position: relative;
 }
 
 .brand-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px;
+  font-family: 'Cinzel', serif;
+  font-size: 36px;
   font-weight: 900;
-  color: var(--text);
-  letter-spacing: 8px;
-  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--gold-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 12px;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3);
 }
 
 .vip-badge {
   display: inline-block;
-  font-family: 'Playfair Display', serif;
-  font-size: 10px;
-  font-weight: 400;
-  color: var(--accent);
-  letter-spacing: 6px;
-  padding: 5px 18px;
-  border: 1px solid rgba(201, 169, 98, 0.4);
-  background: rgba(201, 169, 98, 0.03);
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 8px;
+  padding: 8px 24px;
+  border: 1px solid var(--gold);
+  background: rgba(212, 175, 55, 0.05);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+  position: relative;
 }
 
-/* Divider Compact */
+.vip-badge::before, .vip-badge::after {
+  content: '♦';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 8px;
+  color: var(--gold);
+}
+
+.vip-badge::before { left: 8px; }
+.vip-badge::after { right: 8px; }
+
+/* Divider */
 .divider {
-  width: 40px;
-  height: 1px;
-  background: var(--accent);
-  margin: 20px auto;
-  opacity: 0.4;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 30px auto;
+  opacity: 0.6;
 }
 
-/* Signal Details Compact */
+/* Signal Details */
 .signal-details {
-  margin: 25px 0;
+  margin: 30px 0;
 }
 
 .signal-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(42, 42, 42, 0.6);
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(42, 42, 42, 0.5);
+  transition: all 0.3s;
 }
 
-.signal-row:last-child {
-  border-bottom: none;
+.signal-row:hover {
+  border-bottom-color: rgba(4, 30, 177, 0.3);
+}
+
+.signal-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.signal-icon {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+  fill: none;
+  opacity: 0.8;
+  flex-shrink: 0;
 }
 
 .signal-label {
-  font-size: 10px;
+  font-size: 11px;
   color: #666;
-  letter-spacing: 2.5px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .signal-value {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 14px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
   color: var(--text);
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 
-/* Direction Compact */
+/* Direction */
 .direction-sell {
   color: var(--bear);
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 1.5px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgb(238, 0, 0);
 }
 
 .direction-buy {
   color: var(--bull);
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 1.5px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(6, 216, 16, 0.897);
 }
 
-/* Footer Compact */
+/* Footer */
 .card-footer {
   text-align: center;
-  margin-top: 25px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
+  margin-top: 35px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(212, 175, 55, 0.15);
 }
 
 .edition-text {
-  font-family: 'Playfair Display', serif;
-  font-size: 9px;
-  color: var(--accent);
-  letter-spacing: 3px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 4px;
   font-weight: 400;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
-/* Results Page Compact */
+/* Results Page */
 #results-page {
   display: none;
   width: 100%;
-  max-width: 380px;
+  max-width: 400px;
   padding: 10px 0;
+  animation: fadeIn 0.8s ease-out;
 }
 
 .page-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px;
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
   text-align: center;
-  color: var(--text);
-  letter-spacing: 5px;
-  margin-bottom: 25px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--border);
+  color: var(--gold);
+  letter-spacing: 6px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-/* Results List Compact */
+/* Results List */
 .results-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .result-item {
-  background: #111;
+  background: linear-gradient(135deg, #0f0f0f, #161616);
   border: 1px solid var(--border);
-  padding: 18px 20px;
+  padding: 20px 24px;
   display: grid;
   grid-template-columns: 1fr auto auto;
-  gap: 15px;
+  gap: 20px;
   align-items: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.result-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--border);
   transition: all 0.3s;
 }
 
 .result-item:hover {
-  border-color: rgba(201, 169, 98, 0.3);
-  background: #151515;
+  border-color: rgba(212, 175, 55, 0.4);
+  background: #1a1a1a;
+  transform: translateX(5px);
 }
 
-.result-item.win {
-  border-left: 2px solid var(--bull);
+.result-item.win::before {
+  background: var(--bull);
+  box-shadow: 0 0 10px var(--bull);
 }
 
-.result-item.loss {
-  border-left: 2px solid var(--bear);
+.result-item.loss::before {
+  background: var(--bear);
+  box-shadow: 0 0 10px var(--bear);
 }
 
 .asset-name {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.5px;
+  color: var(--text);
 }
 
 .result-meta {
   font-size: 10px;
   color: #555;
-  margin-top: 3px;
+  margin-top: 4px;
   letter-spacing: 0.5px;
 }
 
 .result-type {
-  font-size: 9px;
+  font-size: 10px;
   letter-spacing: 2px;
-  padding: 4px 10px;
+  padding: 6px 12px;
   border: 1px solid;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .type-sell {
   color: var(--bear);
-  border-color: rgba(239, 68, 68, 0.25);
+  border-color: rgba(255, 59, 59, 0.3);
+  background: rgba(255, 59, 59, 0.05);
 }
 
 .type-buy {
   color: var(--bull);
-  border-color: rgba(34, 197, 94, 0.25);
+  border-color: rgba(0, 255, 157, 0.3);
+  background: rgba(0, 255, 157, 0.05);
 }
 
 .result-outcome {
-  font-family: 'Playfair Display', serif;
-  font-size: 18px;
+  font-family: 'Cinzel', serif;
+  font-size: 20px;
   font-weight: 700;
 }
 
-.outcome-win { color: var(--bull); }
-.outcome-loss { color: var(--bear); }
+.outcome-win { 
+  color: var(--bull);
+  text-shadow: 0 0 10px rgba(43, 255, 0, 0.911);
+}
 
-/* Bottom Navigation Compact */
+.outcome-loss { 
+  color: var(--bear);
+  text-shadow: 0 0 10px rgba(224, 10, 10, 0.5);
+}
+
+/* Bottom Navigation */
 #bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0; right: 0;
-  height: 60px;
-  background: #0a0a0a;
-  border-top: 1px solid var(--border);
+  height: 80px;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.95), rgba(5, 5, 5, 1));
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
   display: flex;
   justify-content: center;
-  gap: 60px;
+  gap: 80px;
   align-items: center;
   z-index: 1000;
+  backdrop-filter: blur(10px);
 }
 
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   cursor: pointer;
-  padding: 8px 25px;
+  padding: 10px 30px;
   color: #444;
-  transition: all 0.3s;
-  border: 1px solid transparent;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s ease;
 }
 
 .nav-item:hover {
@@ -319,39 +432,58 @@ body::before {
 }
 
 .nav-item.active {
-  color: var(--accent);
-  border-color: rgba(201, 169, 98, 0.3);
-  background: rgba(201, 169, 98, 0.03);
+  color: var(--gold);
+}
+
+.nav-item.active::after {
+  width: 40px;
 }
 
 .nav-icon {
-  width: 16px; height: 16px;
+  width: 24px; height: 24px;
   stroke-width: 1.5;
   fill: none;
   stroke: currentColor;
+  transition: all 0.3s;
+}
+
+.nav-item.active .nav-icon {
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
 }
 
 .nav-label {
-  font-size: 9px;
-  letter-spacing: 2.5px;
+  font-size: 10px;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
-/* Scrollbar Minimal */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 0; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-/* Very Small Screens */
-@media (max-width: 380px) {
-  .luxury-card { padding: 30px 22px; }
-  .brand-text { font-size: 24px; letter-spacing: 6px; }
-  .signal-value { font-size: 13px; }
-  .asset-name { font-size: 14px; }
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* Responsive */
+@media (max-width: 400px) {
+  .luxury-card { padding: 35px 25px; }
+  .brand-text { font-size: 30px; letter-spacing: 10px; }
+  .signal-value { font-size: 15px; }
+  .asset-name { font-size: 15px; }
+  #bottom-nav { gap: 60px; }
 }
 </style>
-<base target="_blank">
 </head>
 <body>
 
@@ -371,22 +503,45 @@ body::before {
 
       <div class="signal-details">
         <div class="signal-row">
-          <span class="signal-label">Asset Pair</span>
+          <div class="signal-left">
+            <svg class="signal-icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 3"/>
+            </svg>
+            <span class="signal-label">Asset Pair</span>
+          </div>
           <span class="signal-value">USDTRY-OTC</span>
         </div>
         
         <div class="signal-row">
-          <span class="signal-label">Timeframe</span>
+          <div class="signal-left">
+            <svg class="signal-icon" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <path d="M16 2v4M8 2v4M3 10h18"/>
+            </svg>
+            <span class="signal-label">Timeframe</span>
+          </div>
           <span class="signal-value">1 MINUTE</span>
         </div>
         
         <div class="signal-row">
-          <span class="signal-label">Entry Time</span>
+          <div class="signal-left">
+            <svg class="signal-icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            <span class="signal-label">Entry Time</span>
+          </div>
           <span class="signal-value">14:35 UTC+1</span>
         </div>
         
         <div class="signal-row">
-          <span class="signal-label">Direction</span>
+          <div class="signal-left">
+            <svg class="signal-icon" viewBox="0 0 24 24">
+              <path d="M12 19V5M5 12l7-7 7 7"/>
+            </svg>
+            <span class="signal-label">Direction</span>
+          </div>
           <span class="signal-value direction-sell">▼ SELL</span>
         </div>
       </div>
@@ -490,3 +645,4 @@ document.addEventListener('dblclick', function(event) {
 
 </body>
 </html>
+
